@@ -52,6 +52,8 @@ Ens\JobeetBundle\Entity\Job:
     updated_at:
       type: datetime
       nullable: true
+    expired_at:
+      type: datetime
   manyToOne:
     category:
       targetEntity: Category
@@ -60,5 +62,5 @@ Ens\JobeetBundle\Entity\Job:
         name: category_id
         referencedColumnName: id
   lifecycleCallbacks:
-    prePersist: [ setCreatedAtValue ]
+    prePersist: [ setCreatedAtValue,setExpiredAtValue]
     preUpdate: [ setUpdatedAtValue ]

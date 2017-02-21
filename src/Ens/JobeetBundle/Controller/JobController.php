@@ -19,8 +19,8 @@ class JobController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $jobs = $em->getRepository('EnsJobeetBundle:Job')->findAll();
+        $query = $em->createQuery("SELECT j FROM EnsJobeetBundle:Job j WHERE j.expired_at > :date ")->setParameter('date',date('Y-m-d H:i:s', time() - 86400 * 30));
+        $jobs = $query->getResult();
 
         return $this->render('job/index.html.twig', array(
             'jobs' => $jobs,
